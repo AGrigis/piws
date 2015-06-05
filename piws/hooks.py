@@ -28,7 +28,7 @@ class CreateDocumentation(hook.Hook):
         """
         # Get the data url
         with self.repo.internal_cnx() as cnx:
-            data_url = cnx.base_url() + "/data/"
+            data_url = cnx.base_url() + "data/"
 
         # Get the documentation
         doc_folder = self.repo.vreg.config["documentation_folder"]
