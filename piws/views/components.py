@@ -297,7 +297,6 @@ class RelationBox(component.CtxComponent):
             w(u"<br/><div><a href='{0}'>&#8634; see more</a></div>".format(href))
 
 
-
 def registration_callback(vreg):
 
     # Update components
