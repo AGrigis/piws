@@ -11,9 +11,9 @@
 from string import maketrans
 from collections import OrderedDict
 import json
-import os
-import copy
 import re
+import datetime
+import time
 
 # Cubicweb import
 from cubicweb.view import View
@@ -215,7 +215,16 @@ class JhugetableView(View):
         html += ("a.href = 'data:application/csv;charset=utf-8,' "
                  "+ encodeURIComponent(csvString);")
         html += "a.target = '_blank';"
-        html += "a.download = 'datatable.csv';"
+        # html += "a.download = 'datatable.csv';"
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')\
+            .replace(' ', '_')
+        if 'timepoint' in kwargs:
+            csv_file_name = '{0}_{1}_{2}.csv'.format(title, kwargs['timepoint'],
+                                                st)
+        else:
+            csv_file_name = '{0}_{1}'.format(title, st)
+        html += "a.download = '{0}';".format(csv_file_name)
 
         # > hide the processing message
         html += "document.body.appendChild(a);"
@@ -554,7 +563,17 @@ class JtableView(View):
         html += ("a.href = 'data:application/csv;charset=utf-8,' "
                  "+ encodeURIComponent(csvString);")
         html += "a.target = '_blank';"
-        html += "a.download = 'datatable.csv';"
+        # html += "a.download = 'datatable.csv';"
+
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')\
+            .replace(' ', '_')
+        if 'timepoint' in kwargs:
+            csv_file_name = '{0}_{1}_{2}.csv'.format(title, kwargs['timepoint'],
+                                                st)
+        else:
+            csv_file_name = '{0}_{1}'.format(title, st)
+        html += "a.download = '{0}';".format(csv_file_name)
 
         # > hide the processing message
         html += "document.body.appendChild(a);"
