@@ -566,8 +566,7 @@ class JtableView(View):
         # html += "a.download = 'datatable.csv';"
 
         ts = time.time()
-        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')\
-            .replace(' ', '_')
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d_%H:%M:%S')
         if 'timepoint' in kwargs:
             csv_file_name = '{0}_{1}_{2}.csv'.format(title, kwargs['timepoint'],
                                                 st)

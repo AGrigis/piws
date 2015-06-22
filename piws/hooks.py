@@ -13,6 +13,8 @@ from cubicweb.server import hook
 # PIWS import
 from cubes.piws.docgen.rst2html import create_html_doc
 
+import os
+
 
 class CreateDocumentation(hook.Hook):
     """ On startup create the documentation.
@@ -30,10 +32,12 @@ class CreateDocumentation(hook.Hook):
         with self.repo.internal_cnx() as cnx:
             data_url = cnx.base_url() + "data/"
 
+        # go to virtualenv root folder (must be done in server mode)
+        os.chdir(os.environ["VIRTUAL_ENV"])
+
         # Get the documentation
         doc_folder = self.repo.vreg.config["documentation_folder"]
         if doc_folder:
             self.repo.vreg.docmap = create_html_doc(doc_folder, data_url)
         else:
             self.repo.vreg.docmap = {}
-
