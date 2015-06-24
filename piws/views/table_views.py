@@ -927,7 +927,10 @@ def get_questionnaires_data(self):
             timepoint_index = [label.lower() for label in labels]\
                 .index(timepoint.lower())
             # Fill the cells with hyperlinks to the questionnaire view
-            record[timepoint_index] = "<a href='{0}'>link</a>".format(href)
+            record[timepoint_index] = "<a href='{0}'>" \
+                                      "<img src='data/images/blue-arrow.png' " \
+                                      "alt='Open questionnaire' width='20' " \
+                                      "height='20' border='0'></a>".format(href)
         # Store the table formatted row
         records.append(record)
 
